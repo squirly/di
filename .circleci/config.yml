@@ -7,7 +7,9 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - run: npm ci
+      - run:
+          name: Install Dependencies
+          command: npm ci
       - run:
           name: Lint Commits
           command: npm run semantic-commitlint -- --ci
@@ -26,5 +28,5 @@ jobs:
       - store_test_results:
           path: reports/tests
       - run:
-          name: release
+          name: Release
           command: npm run semantic-release || true
