@@ -1,0 +1,30 @@
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: npm ci
+      - run:
+          name: Lint Commits
+          command: npm run semantic-commitlint -- --ci
+      - run:
+          name: Lint
+          command: npm run lint
+      - run:
+          name: Build
+          command: npm run build
+      - run:
+          name: Test
+          command: npm run test:coverage
+      - store_artifacts:
+          path: reports
+          prefix: reports
+      - store_test_results:
+          path: reports/tests
+      - run:
+          name: release
+          command: npm run semantic-release || true
