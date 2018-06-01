@@ -1,0 +1,96 @@
+{
+  "name": "@squirly/di",
+  "version": "0.0.0-development",
+  "description": "A slim, fully typed dependency inection library for achieving IoC.",
+  "author": "Tyler Jones <tyler@squirly.ca>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/squirly/di.git"
+  },
+  "keywords": [
+    "di",
+    "ioc",
+    "injection"
+  ],
+  "bugs": {
+    "url": "https://github.com/squirly/di/issues"
+  },
+  "homepage": "https://github.com/squirly/di#readme",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "lint": "tslint --project .",
+    "lint:fix": "tslint --project . --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "prebuild": "rm -rf lib",
+    "build": "tsc",
+    "commit": "git-cz",
+    "semantic-commitlint": "semantic-commitlint",
+    "semantic-release": "semantic-release"
+  },
+  "dependencies": {
+    "ts-brand": "^0.0.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "6.2.0",
+    "@commitlint/config-conventional": "6.1.3",
+    "@types/jest": "22.2.3",
+    "@urbandoor/lint": "0.2.0",
+    "commitizen": "2.10.1",
+    "cz-conventional-changelog": "2.1.0",
+    "jest": "23.1.0",
+    "jest-junit": "4.0.0",
+    "prettier": "1.13.3",
+    "semantic-commitlint": "^1.3.2",
+    "semantic-release": "15.5.0",
+    "ts-jest": "22.4.6",
+    "tslint": "5.10.0",
+    "typescript": "2.9.1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testMatch": [
+      "<rootDir>/src/**/*.spec.ts"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "ts"
+    ],
+    "coverageDirectory": "<rootDir>/reports/coverage",
+    "collectCoverageFrom": [
+      "<rootDir>/src/**/*.ts"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": -2,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "testResultsProcessor": "jest-junit",
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "tsconfig.jest.json"
+      }
+    }
+  },
+  "jest-junit": {
+    "output": "./reports/tests/junit.xml"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "release": {
+    "verifyRelease": [
+      "semantic-commitlint"
+    ]
+  }
+}
