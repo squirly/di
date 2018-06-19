@@ -6,3 +6,4 @@ export {
   MissingDependencyError,
 } from './DependencyResolutionError';
 export {Injectable} from './Injectable';
+export {Module} from './Module';
