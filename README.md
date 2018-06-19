@@ -26,6 +26,8 @@ npm install @squirly/di
 
 ## Usage
 
+###Container
+
 ```typescript
 import {Binding, Container, Injectable} from '@squirly/di';
 
@@ -54,8 +56,36 @@ const container = Container.create()
   .bindService(Client, Client);
 
 container.resolve(Client).then(client => {
-  client.getData(); // LOG: Calling API with 'yek-terces-ym'
+  client.getData(); // returns "Calling API with 'yek-terces-ym'"
 });
+```
+
+### Module
+
+Using the definitions above, a `Module` can be created.
+
+```typescript
+import {Binding, Container, Injectable} from '@squirly/di';
+
+const module = Module.create(
+  Container.create()
+    .bindConstant(AuthenticationKey, 'my-secret-key')
+    .bindSingletonFactory(ReversedKey, async c =>
+      Array.from(await c.resolve(AuthenticationKey))
+        .reverse()
+        .join(''),
+    ),
+).export(ReversedKey);
+
+const container = Container.create()
+  .importModule(module)
+  .bindService(Client, Client);
+
+container.resolve(Client).then(client => {
+  client.getData() // returns "Calling API with 'yek-terces-ym'"
+});
+
+container.resolve(AuthenticationKey); // Promise rejected with MissingDependencyError('Could not find dependency bound to AuthenticationKey.')
 ```
 
 ## Maintainers
@@ -64,7 +94,8 @@ Tyler Jones ~ [@squirly](https://github.com/squirly)
 
 ## Contribute
 
-PRs accepted. Commits must follow the [Angular Commit Message Conventions](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines).
+PRs accepted. Commits must follow the
+[Angular Commit Message Conventions](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines).
 
 If editing the README, please conform to the
 [standard-readme](https://github.com/RichardLitt/standard-readme) specification.

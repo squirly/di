@@ -5,6 +5,7 @@ import {
   MissingDependencyError,
 } from './DependencyResolutionError';
 import {Injectable} from './Injectable';
+import {Module} from './Module';
 
 export class Container<Service> {
   static create(): Container<never> {
@@ -75,6 +76,14 @@ export class Container<Service> {
       },
       service.name,
     );
+  }
+
+  importModule<Export>(module: Module<Export>): Container<Service | Export> {
+    const resolutions: Array<Resolution<Service | Export>> = [
+      ...module.resolutions,
+      ...this.resolutions,
+    ];
+    return new Container(resolutions, []);
   }
 
   async resolve<S extends Service>({Tag}: Binding<S>): Promise<S> {

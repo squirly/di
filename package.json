@@ -63,7 +63,8 @@
     ],
     "coverageDirectory": "<rootDir>/reports/coverage",
     "collectCoverageFrom": [
-      "<rootDir>/src/**/*.ts"
+      "<rootDir>/src/**/*.ts",
+      "!<rootDir>/src/testing.ts"
     ],
     "coverageThreshold": {
       "global": {
@@ -73,7 +74,10 @@
         "statements": 100
       }
     },
-    "testResultsProcessor": "jest-junit",
+    "reporters": [
+      "default",
+      "jest-junit"
+    ],
     "globals": {
       "ts-jest": {
         "tsConfigFile": "tsconfig.jest.json"

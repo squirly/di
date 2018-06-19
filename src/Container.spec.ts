@@ -4,6 +4,7 @@ import {
   DependencyResolutionError,
   MissingDependencyError,
 } from './DependencyResolutionError';
+import {expectRejectedWithError} from './testing';
 
 interface Dep1 {
   readonly a: string;
@@ -204,18 +205,3 @@ describe('Container', () => {
     });
   });
 });
-
-const expectRejectedWithError = (
-  promise: Promise<any>,
-  errorType: any,
-  message: string,
-): Promise<any> =>
-  promise.then(
-    () => {
-      throw new Error('Expected promise rejection');
-    },
-    error => {
-      expect(error.constructor).toBe(errorType);
-      expect(error.message).toBe(message);
-    },
-  );
