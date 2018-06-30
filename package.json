@@ -46,7 +46,7 @@
     "prettier": "1.13.7",
     "semantic-commitlint": "^1.3.2",
     "semantic-release": "15.6.0",
-    "ts-jest": "22.4.6",
+    "ts-jest": "23.0.0",
     "tslint": "5.10.0",
     "typescript": "2.9.2"
   },
