@@ -12,7 +12,7 @@ jobs:
           command: npm ci
       - run:
           name: Lint Commits
-          command: npm run semantic-commitlint -- --ci
+          command: npm run commitlint -- --ci
       - run:
           name: Lint
           command: npm run lint
@@ -21,7 +21,7 @@ jobs:
           command: npm run build
       - run:
           name: Test
-          command: npm run test:coverage
+          command: npm run test
       - store_artifacts:
           path: reports
           prefix: reports

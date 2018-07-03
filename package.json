@@ -22,13 +22,12 @@
   "scripts": {
     "lint": "tslint --project .",
     "lint:fix": "tslint --project . --fix",
-    "test": "jest",
+    "test": "jest --coverage",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
     "prebuild": "rm -rf lib",
     "build": "tsc",
-    "commit": "git-cz",
-    "semantic-commitlint": "semantic-commitlint",
+    "commit": "git-cz && npm run commitlint",
+    "commitlint": "semantic-commitlint",
     "semantic-release": "semantic-release"
   },
   "dependencies": {
@@ -68,10 +67,10 @@
     ],
     "coverageThreshold": {
       "global": {
+        "statements": 100,
         "branches": -2,
         "functions": 100,
-        "lines": 100,
-        "statements": 100
+        "lines": 100
       }
     },
     "reporters": [
