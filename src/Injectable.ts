@@ -51,6 +51,27 @@ export function Injectable<
   D6,
   Target extends new (d1: D1, d2: D2, d3: D3, d4: D4, d5: D5, d6: D6) => Service
 >(Class: Target & Injectable6<Service, D1, D2, D3, D4, D5, D6>): typeof Class;
+export function Injectable<
+  Service,
+  D1,
+  D2,
+  D3,
+  D4,
+  D5,
+  D6,
+  D7,
+  Target extends new (
+    d1: D1,
+    d2: D2,
+    d3: D3,
+    d4: D4,
+    d5: D5,
+    d6: D6,
+    d7: D7,
+  ) => Service
+>(
+  Class: Target & Injectable7<Service, D1, D2, D3, D4, D5, D6, D7>,
+): typeof Class;
 export function Injectable<Dependency, T extends Injectable<T, Dependency>>(
   target: T,
 ): T {
@@ -89,6 +110,15 @@ export namespace Injectable {
     D5 extends Binding<any>,
     D6 extends Binding<any>
   >(deps: [D1, D2, D3, D4, D5, D6]): typeof deps;
+  export function Resolution<
+    D1 extends Binding<any>,
+    D2 extends Binding<any>,
+    D3 extends Binding<any>,
+    D4 extends Binding<any>,
+    D5 extends Binding<any>,
+    D6 extends Binding<any>,
+    D7 extends Binding<any>
+  >(deps: [D1, D2, D3, D4, D5, D6, D7]): typeof deps;
   export function Resolution<Dependencies>(
     deps: Array<Binding<Dependencies>>,
   ): Array<Binding<Dependencies>> {
@@ -117,6 +147,20 @@ type Injectable6<Service, D1, D2, D3, D4, D5, D6> = Partial<Binding<Service>> &
       Binding<D4>,
       Binding<D5>,
       Binding<D6>
+    ]
+  >;
+type Injectable7<Service, D1, D2, D3, D4, D5, D6, D7> = Partial<
+  Binding<Service>
+> &
+  Inject<
+    [
+      Binding<D1>,
+      Binding<D2>,
+      Binding<D3>,
+      Binding<D4>,
+      Binding<D5>,
+      Binding<D6>,
+      Binding<D7>
     ]
   >;
 
