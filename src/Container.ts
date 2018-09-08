@@ -27,7 +27,7 @@ export class Container<Service> {
       (factory.name === '' || factory.name === 'anonymous'
         ? undefined
         : factory.name);
-    const resolution: Resolution<S> = {tag, factory, name};
+    const resolution: Resolution<S> = {name, tag, factory};
     return new Container<Service | S>(
       [resolution, ...this.resolutions],
       this.chain,
