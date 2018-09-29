@@ -29,7 +29,7 @@ describe('Container', () => {
         static Tag = Binding.Tag<Client>('Client');
         static Inject = Injectable.Resolution(ReversedKey);
 
-        constructor(private key: string) {}
+        constructor(private readonly key: string) {}
 
         getData(): string {
           return `Calling API with '${this.key}'`;

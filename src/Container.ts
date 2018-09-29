@@ -13,8 +13,8 @@ export class Container<Service> {
   }
 
   private constructor(
-    private resolutions: Array<Resolution<Service>>,
-    private chain: Array<Resolution<Service>>,
+    private readonly resolutions: Array<Resolution<Service>>,
+    private readonly chain: Array<Resolution<Service>>,
   ) {}
 
   bindFactory<S>(

@@ -9,6 +9,7 @@
     "no-namespace": false,
     "no-non-null-assertion": true,
     "object-literal-sort-keys": [true, "ignore-case", "match-declaration-order"],
+    "prefer-readonly": true,
     "prettier": true
   }
 }
