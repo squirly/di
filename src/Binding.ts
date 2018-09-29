@@ -1,7 +1,5 @@
-import {Brand} from 'ts-brand';
-
 export interface Binding<Serivce> {
-  Tag: Binding.Tag<Serivce>;
+  readonly Tag: Binding.Tag<Serivce>;
 }
 
 export function Binding<Service>(name: string): Binding<Service> {
@@ -9,7 +7,9 @@ export function Binding<Service>(name: string): Binding<Service> {
 }
 
 export namespace Binding {
-  export type Tag<Service> = Brand<symbol, Service, '__service'>;
+  export type Tag<Service> = symbol & {
+    __service__: Service;
+  };
 
   export function Tag<Service>(name: string): Tag<Service> {
     return Symbol(name) as Tag<Service>;
