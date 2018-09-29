@@ -27,7 +27,7 @@ describe('Container', () => {
       @Injectable
       class Client {
         static Tag = Binding.Tag<Client>('Client');
-        static Inject = Injectable.Resolution([ReversedKey]);
+        static Inject = Injectable.Resolution(ReversedKey);
 
         constructor(private key: string) {}
 

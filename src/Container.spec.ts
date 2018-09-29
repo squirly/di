@@ -71,7 +71,7 @@ describe('Container', () => {
       @Injectable
       class DepService {
         static Tag = Binding.Tag<DepService>('DepService');
-        static Inject = Injectable.Resolution([Dep1, Dep2]);
+        static Inject = Injectable.Resolution(Dep1, Dep2);
 
         constructor(public injectedDep1: Dep1, public injectedDep2: Dep2) {
           calls += 1;
@@ -181,7 +181,7 @@ describe('Container', () => {
       @Injectable
       class Client {
         static Tag = Binding.Tag<Client>('Client');
-        static Inject = Injectable.Resolution([ReversedKey]);
+        static Inject = Injectable.Resolution(ReversedKey);
 
         constructor(private key: string) {}
 

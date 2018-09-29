@@ -79,51 +79,11 @@ export function Injectable<Dependency, T extends Injectable<T, Dependency>>(
 }
 
 export namespace Injectable {
-  export function Resolution(deps: never[]): typeof deps;
-  export function Resolution<D1 extends Binding<any>>(deps: [D1]): typeof deps;
-  export function Resolution<D1 extends Binding<any>, D2 extends Binding<any>>(
-    deps: [D1, D2],
-  ): typeof deps;
-  export function Resolution<
-    D1 extends Binding<any>,
-    D2 extends Binding<any>,
-    D3 extends Binding<any>
-  >(deps: [D1, D2, D3]): typeof deps;
-  export function Resolution<
-    D1 extends Binding<any>,
-    D2 extends Binding<any>,
-    D3 extends Binding<any>,
-    D4 extends Binding<any>
-  >(deps: [D1, D2, D3, D4]): typeof deps;
-  export function Resolution<
-    D1 extends Binding<any>,
-    D2 extends Binding<any>,
-    D3 extends Binding<any>,
-    D4 extends Binding<any>,
-    D5 extends Binding<any>
-  >(deps: [D1, D2, D3, D4, D5]): typeof deps;
-  export function Resolution<
-    D1 extends Binding<any>,
-    D2 extends Binding<any>,
-    D3 extends Binding<any>,
-    D4 extends Binding<any>,
-    D5 extends Binding<any>,
-    D6 extends Binding<any>
-  >(deps: [D1, D2, D3, D4, D5, D6]): typeof deps;
-  export function Resolution<
-    D1 extends Binding<any>,
-    D2 extends Binding<any>,
-    D3 extends Binding<any>,
-    D4 extends Binding<any>,
-    D5 extends Binding<any>,
-    D6 extends Binding<any>,
-    D7 extends Binding<any>
-  >(deps: [D1, D2, D3, D4, D5, D6, D7]): typeof deps;
-  export function Resolution<Dependencies>(
-    deps: Array<Binding<Dependencies>>,
-  ): Array<Binding<Dependencies>> {
-    return deps;
-  }
+  export const Resolution = <Injection extends Array<Binding<any>>>(
+    ...inject: Injection
+  ): Injection => {
+    return inject;
+  };
 }
 
 type Injectable0<Service> = Partial<Binding<Service>> &
