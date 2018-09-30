@@ -2,6 +2,7 @@
   "extends": ["tslint:recommended", "tslint-config-prettier"],
   "rulesDirectory": ["tslint-plugin-prettier"],
   "rules": {
+    "file-name-casing": false,
     "interface-name": false,
     "max-classes-per-file": false,
     "member-access": false,

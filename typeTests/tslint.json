@@ -1,0 +1,9 @@
+{
+  "extends": ["dtslint/dtslint", "../tslint.json"],
+  "rules": {
+    "no-empty": false,
+    "no-duplicate-imports": false,
+    "no-unused-expression": false,
+    "no-unnecessary-class": false
+  }
+}
