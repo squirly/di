@@ -37,7 +37,7 @@
     "@commitlint/cli": "7.1.2",
     "@commitlint/config-conventional": "7.1.2",
     "@types/jest": "23.3.2",
-    "commitizen": "2.10.1",
+    "commitizen": "3.0.1",
     "cz-conventional-changelog": "2.1.0",
     "dtslint": "0.3.0",
     "jest": "23.6.0",
