@@ -72,6 +72,82 @@ export function Injectable<
 >(
   Class: Target & Injectable7<Service, D1, D2, D3, D4, D5, D6, D7>,
 ): typeof Class;
+export function Injectable<
+  Service,
+  D1,
+  D2,
+  D3,
+  D4,
+  D5,
+  D6,
+  D7,
+  D8,
+  Target extends new (
+    d1: D1,
+    d2: D2,
+    d3: D3,
+    d4: D4,
+    d5: D5,
+    d6: D6,
+    d7: D7,
+    d8: D8,
+  ) => Service
+>(
+  Class: Target & Injectable8<Service, D1, D2, D3, D4, D5, D6, D7, D8>,
+): typeof Class;
+export function Injectable<
+  Service,
+  D1,
+  D2,
+  D3,
+  D4,
+  D5,
+  D6,
+  D7,
+  D8,
+  D9,
+  Target extends new (
+    d1: D1,
+    d2: D2,
+    d3: D3,
+    d4: D4,
+    d5: D5,
+    d6: D6,
+    d7: D7,
+    d8: D8,
+    d9: D9,
+  ) => Service
+>(
+  Class: Target & Injectable9<Service, D1, D2, D3, D4, D5, D6, D7, D8, D9>,
+): typeof Class;
+export function Injectable<
+  Service,
+  D1,
+  D2,
+  D3,
+  D4,
+  D5,
+  D6,
+  D7,
+  D8,
+  D9,
+  D10,
+  Target extends new (
+    d1: D1,
+    d2: D2,
+    d3: D3,
+    d4: D4,
+    d5: D5,
+    d6: D6,
+    d7: D7,
+    d8: D8,
+    d9: D9,
+    d10: D10,
+  ) => Service
+>(
+  Class: Target &
+    Injectable10<Service, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10>,
+): typeof Class;
 export function Injectable<Dependency, T extends Injectable<T, Dependency>>(
   target: T,
 ): T {
@@ -121,6 +197,54 @@ type Injectable7<Service, D1, D2, D3, D4, D5, D6, D7> = Partial<
       Binding<D5>,
       Binding<D6>,
       Binding<D7>
+    ]
+  >;
+type Injectable8<Service, D1, D2, D3, D4, D5, D6, D7, D8> = Partial<
+  Binding<Service>
+> &
+  Inject<
+    [
+      Binding<D1>,
+      Binding<D2>,
+      Binding<D3>,
+      Binding<D4>,
+      Binding<D5>,
+      Binding<D6>,
+      Binding<D7>,
+      Binding<D8>
+    ]
+  >;
+type Injectable9<Service, D1, D2, D3, D4, D5, D6, D7, D8, D9> = Partial<
+  Binding<Service>
+> &
+  Inject<
+    [
+      Binding<D1>,
+      Binding<D2>,
+      Binding<D3>,
+      Binding<D4>,
+      Binding<D5>,
+      Binding<D6>,
+      Binding<D7>,
+      Binding<D8>,
+      Binding<D9>
+    ]
+  >;
+type Injectable10<Service, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10> = Partial<
+  Binding<Service>
+> &
+  Inject<
+    [
+      Binding<D1>,
+      Binding<D2>,
+      Binding<D3>,
+      Binding<D4>,
+      Binding<D5>,
+      Binding<D6>,
+      Binding<D7>,
+      Binding<D8>,
+      Binding<D9>,
+      Binding<D10>
     ]
   >;
 
