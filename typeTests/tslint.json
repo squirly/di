@@ -4,6 +4,7 @@
     "no-empty": false,
     "no-duplicate-imports": false,
     "no-unused-expression": false,
-    "no-unnecessary-class": false
+    "no-unnecessary-class": false,
+    "unnecessary-constructor": false
   }
 }
