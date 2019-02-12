@@ -36,7 +36,7 @@
   "devDependencies": {
     "@commitlint/cli": "7.4.0",
     "@commitlint/config-conventional": "7.3.1",
-    "@types/jest": "23.3.13",
+    "@types/jest": "24.0.1",
     "commitizen": "3.0.5",
     "cz-conventional-changelog": "2.1.0",
     "dtslint": "0.3.0",
