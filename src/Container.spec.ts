@@ -22,6 +22,21 @@ interface Dep3 {
 const Dep3 = Binding<Dep3>('Dep3');
 
 describe('Container', () => {
+  describe('#decorate', () => {
+    it('adds dependencies in decorator', async () => {
+      const container = Container.create()
+        .bindFactory(Dep1, async c => ({
+          a: (await c.resolve(Dep2)).b.toString(),
+        }))
+        .decorate(c =>
+          c.bindFactory(Dep2, () => ({b: 2})).bindConstant(Dep3, {c: true}),
+        );
+
+      expect(await container.resolve(Dep1)).toHaveProperty('a', '2');
+      expect(await container.resolve(Dep3)).toHaveProperty('c', true);
+    });
+  });
+
   describe('#bindFactory', () => {
     it('calls the factory with the latest container container', async () => {
       const container = Container.create()

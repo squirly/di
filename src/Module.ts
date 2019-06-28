@@ -1,6 +1,9 @@
 import {Binding} from './Binding';
 import {Container, Resolution} from './Container';
 
+/**
+ * @deprecated Use container Decorators instead.
+ */
 export class Module<Export, Service = any> {
   static create<Service>(
     container: Container<Service>,
