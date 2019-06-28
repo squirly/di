@@ -54,7 +54,7 @@ describe('Container', () => {
     });
   });
 
-  describe('#bindConstant', async () => {
+  describe('#bindConstant', () => {
     it('returns the constant', async () => {
       const dep: Dep2 = {b: 1};
 
