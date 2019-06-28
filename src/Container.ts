@@ -17,6 +17,12 @@ export class Container<Service> {
     private readonly chain: Array<Resolution<Service>>,
   ) {}
 
+  decorate<S>(
+    decorator: Container.Decorator<S, Service>,
+  ): Container<Service | S> {
+    return decorator(this);
+  }
+
   bindFactory<S>(
     {Tag: tag}: Binding<S>,
     factory: Resolution<S>['factory'],
@@ -118,4 +124,10 @@ export interface Resolution<Service> {
   name?: string;
   tag: Binding.Tag<Service>;
   factory: (container: Container<any>) => Service | Promise<Service>;
+}
+
+export namespace Container {
+  export type Decorator<Out, In> = (
+    container: Container<In>,
+  ) => Container<In | Out>;
 }
