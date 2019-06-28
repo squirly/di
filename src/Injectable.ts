@@ -297,7 +297,7 @@ type Injectable6<Service, D1, D2, D3, D4, D5, D6> = Partial<Binding<Service>> &
       Binding<D3>,
       Binding<D4>,
       Binding<D5>,
-      Binding<D6>
+      Binding<D6>,
     ]
   >;
 type Injectable7<Service, D1, D2, D3, D4, D5, D6, D7> = Partial<
@@ -311,7 +311,7 @@ type Injectable7<Service, D1, D2, D3, D4, D5, D6, D7> = Partial<
       Binding<D4>,
       Binding<D5>,
       Binding<D6>,
-      Binding<D7>
+      Binding<D7>,
     ]
   >;
 type Injectable8<Service, D1, D2, D3, D4, D5, D6, D7, D8> = Partial<
@@ -326,7 +326,7 @@ type Injectable8<Service, D1, D2, D3, D4, D5, D6, D7, D8> = Partial<
       Binding<D5>,
       Binding<D6>,
       Binding<D7>,
-      Binding<D8>
+      Binding<D8>,
     ]
   >;
 type Injectable9<Service, D1, D2, D3, D4, D5, D6, D7, D8, D9> = Partial<
@@ -342,7 +342,7 @@ type Injectable9<Service, D1, D2, D3, D4, D5, D6, D7, D8, D9> = Partial<
       Binding<D6>,
       Binding<D7>,
       Binding<D8>,
-      Binding<D9>
+      Binding<D9>,
     ]
   >;
 type Injectable10<Service, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10> = Partial<
@@ -359,7 +359,7 @@ type Injectable10<Service, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10> = Partial<
       Binding<D7>,
       Binding<D8>,
       Binding<D9>,
-      Binding<D10>
+      Binding<D10>,
     ]
   >;
 type Injectable11<
@@ -388,7 +388,7 @@ type Injectable11<
       Binding<D8>,
       Binding<D9>,
       Binding<D10>,
-      Binding<D11>
+      Binding<D11>,
     ]
   >;
 type Injectable12<
@@ -419,7 +419,7 @@ type Injectable12<
       Binding<D9>,
       Binding<D10>,
       Binding<D11>,
-      Binding<D12>
+      Binding<D12>,
     ]
   >;
 type Injectable13<
@@ -452,7 +452,7 @@ type Injectable13<
       Binding<D10>,
       Binding<D11>,
       Binding<D12>,
-      Binding<D13>
+      Binding<D13>,
     ]
   >;
 
