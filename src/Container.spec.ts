@@ -118,7 +118,7 @@ describe('Container', () => {
       return expectRejectedWithError(
         container.resolve(Dep1),
         MissingDependencyError,
-        'Could not find dependency bound to Dep2. Resolution chain: Dep1.',
+        'Could not find dependency bound to Dep2. Resolution chain: Dep1 -> Dep2.',
       );
     });
 

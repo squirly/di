@@ -21,12 +21,19 @@ export class DependencyResolutionError extends Error {
   innerError: Error;
   chain: Array<Resolution<any>>;
 
-  constructor(error: Error, chain: Array<Resolution<any>>) {
+  constructor(
+    error: Error,
+    chain: Array<Resolution<any>>,
+    tag?: Binding.Tag<any>,
+  ) {
     const chainMessage =
       chain.length === 0
         ? undefined
         : `Resolution chain: ${chain
             .map(DependencyResolutionError.descriptionFromResolution)
+            .concat(
+              tag ? [DependencyResolutionError.descriptionFromTag(tag)] : [],
+            )
             .join(DEPENDENCY_OPERATOR)}.`;
 
     super([error.message, chainMessage].filter(m => m).join(' '));
@@ -46,6 +53,7 @@ export class MissingDependencyError extends DependencyResolutionError {
         )}.`,
       ),
       chain,
+      tag,
     );
     Object.setPrototypeOf(this, MissingDependencyError.prototype);
   }
