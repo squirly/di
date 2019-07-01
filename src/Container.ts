@@ -13,9 +13,15 @@ export class Container<Service> {
   }
 
   private constructor(
-    private resolutions: Array<Resolution<Service>>,
-    private chain: Array<Resolution<Service>>,
+    private readonly resolutions: Array<Resolution<Service>>,
+    private readonly chain: Array<Resolution<Service>>,
   ) {}
+
+  decorate<S>(
+    decorator: Container.Decorator<S, Service>,
+  ): Container<Service | S> {
+    return decorator(this);
+  }
 
   bindFactory<S>(
     {Tag: tag}: Binding<S>,
@@ -27,7 +33,7 @@ export class Container<Service> {
       (factory.name === '' || factory.name === 'anonymous'
         ? undefined
         : factory.name);
-    const resolution: Resolution<S> = {tag, factory, name};
+    const resolution: Resolution<S> = {name, tag, factory};
     return new Container<Service | S>(
       [resolution, ...this.resolutions],
       this.chain,
@@ -118,4 +124,10 @@ export interface Resolution<Service> {
   name?: string;
   tag: Binding.Tag<Service>;
   factory: (container: Container<any>) => Service | Promise<Service>;
+}
+
+export namespace Container {
+  export type Decorator<Out, In> = (
+    container: Container<In>,
+  ) => Container<In | Out>;
 }

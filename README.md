@@ -32,32 +32,45 @@ npm install @squirly/di
 import {Binding, Container, Injectable} from '@squirly/di';
 
 const AuthenticationKey = Binding<string>('AuthenticationKey');
-const ReversedKey = Binding<string>('ReversedKey');
+interface Fetcher {
+  fetch: () => Promise<{data: string}>;
+}
+const Fetcher = Binding<Fetcher>('Fetcher');
 
 @Injectable
 class Client {
   static Tag = Binding.Tag<Client>('Client');
-  static Inject = Injectable.Resolution([ReversedKey]);
+  static Inject = Injectable.Resolution(Fetcher);
 
-  constructor(private key: string) {}
+  constructor(private readonly fetcher: Fetcher) {}
 
-  getData(): string {
-    return `Calling API with '${this.key}'`;
+  getData(): Promise<string> {
+    return this.fetcher
+      .fetch()
+      .then(result => `Received result: '${result.data}'`);
   }
+}
+
+async function fetcherFactory(c: Container<string>): Promise<Fetcher> {
+  const key = await c.resolve(AuthenticationKey);
+
+  return {
+    fetch: () =>
+      Promise.resolve({
+        data: `Called with AuthenticationKey "${key}"`,
+      }),
+  };
 }
 
 const container = Container.create()
   .bindConstant(AuthenticationKey, 'my-secret-key')
-  .bindSingletonFactory(ReversedKey, async c =>
-    Array.from(await c.resolve(AuthenticationKey))
-      .reverse()
-      .join(''),
-  )
+  .bindSingletonFactory(Fetcher, fetcherFactory)
   .bindService(Client, Client);
 
-container.resolve(Client).then(client => {
-  client.getData(); // returns "Calling API with 'yek-terces-ym'"
-});
+const clientResult = container.resolve(Client).then(client => client.getData());
+
+// Logs 'Received result: Called with AuthenticationKey "my-secret-key"';
+clientResult.then(console.log);
 ```
 
 ### Module
@@ -65,27 +78,28 @@ container.resolve(Client).then(client => {
 Using the definitions above, a `Module` can be created.
 
 ```typescript
-import {Binding, Container, Injectable} from '@squirly/di';
+import {Module} from '@squirly/di';
 
 const module = Module.create(
   Container.create()
     .bindConstant(AuthenticationKey, 'my-secret-key')
-    .bindSingletonFactory(ReversedKey, async c =>
-      Array.from(await c.resolve(AuthenticationKey))
-        .reverse()
-        .join(''),
-    ),
-).export(ReversedKey);
+    .bindSingletonFactory(Fetcher, fetcherFactory),
+).export(Fetcher);
 
-const container = Container.create()
+const moduleContainer = Container.create()
   .importModule(module)
   .bindService(Client, Client);
 
-container.resolve(Client).then(client => {
-  client.getData() // returns "Calling API with 'yek-terces-ym'"
+moduleContainer.resolve(Client).then(client => {
+  client.getData(); // returns "Calling API with 'yek-terces-ym'"
 });
 
-container.resolve(AuthenticationKey); // Promise rejected with MissingDependencyError('Could not find dependency bound to AuthenticationKey.')
+// $ExpectError
+const resolution = moduleContainer.resolve(AuthenticationKey);
+// Type 'string' is not assignable to 'Fetcher | Client'
+
+// Logs "MissingDependencyError('Could not find dependency bound to AuthenticationKey.')"
+clientResult.catch(console.log);
 ```
 
 ## Maintainers

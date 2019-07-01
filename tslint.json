@@ -1,3 +1,16 @@
 {
-  "extends": ["@urbandoor/lint"]
+  "extends": ["tslint:recommended", "tslint-config-prettier"],
+  "rulesDirectory": ["tslint-plugin-prettier"],
+  "rules": {
+    "file-name-casing": false,
+    "interface-name": false,
+    "max-classes-per-file": false,
+    "member-access": false,
+    "member-ordering": false,
+    "no-namespace": false,
+    "no-non-null-assertion": true,
+    "object-literal-sort-keys": [true, "ignore-case", "match-declaration-order"],
+    "prefer-readonly": true,
+    "prettier": true
+  }
 }

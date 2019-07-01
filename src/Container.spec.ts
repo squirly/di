@@ -22,6 +22,21 @@ interface Dep3 {
 const Dep3 = Binding<Dep3>('Dep3');
 
 describe('Container', () => {
+  describe('#decorate', () => {
+    it('adds dependencies in decorator', async () => {
+      const container = Container.create()
+        .bindFactory(Dep1, async c => ({
+          a: (await c.resolve(Dep2)).b.toString(),
+        }))
+        .decorate(c =>
+          c.bindFactory(Dep2, () => ({b: 2})).bindConstant(Dep3, {c: true}),
+        );
+
+      expect(await container.resolve(Dep1)).toHaveProperty('a', '2');
+      expect(await container.resolve(Dep3)).toHaveProperty('c', true);
+    });
+  });
+
   describe('#bindFactory', () => {
     it('calls the factory with the latest container container', async () => {
       const container = Container.create()
@@ -54,7 +69,7 @@ describe('Container', () => {
     });
   });
 
-  describe('#bindConstant', async () => {
+  describe('#bindConstant', () => {
     it('returns the constant', async () => {
       const dep: Dep2 = {b: 1};
 
@@ -71,7 +86,7 @@ describe('Container', () => {
       @Injectable
       class DepService {
         static Tag = Binding.Tag<DepService>('DepService');
-        static Inject = Injectable.Resolution([Dep1, Dep2]);
+        static Inject = Injectable.Resolution(Dep1, Dep2);
 
         constructor(public injectedDep1: Dep1, public injectedDep2: Dep2) {
           calls += 1;
@@ -181,9 +196,9 @@ describe('Container', () => {
       @Injectable
       class Client {
         static Tag = Binding.Tag<Client>('Client');
-        static Inject = Injectable.Resolution([ReversedKey]);
+        static Inject = Injectable.Resolution(ReversedKey);
 
-        constructor(private key: string) {}
+        constructor(private readonly key: string) {}
 
         getData(): string {
           return `Calling API with '${this.key}'`;

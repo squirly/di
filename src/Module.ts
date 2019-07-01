@@ -1,6 +1,9 @@
 import {Binding} from './Binding';
 import {Container, Resolution} from './Container';
 
+/**
+ * @deprecated Use container Decorators instead.
+ */
 export class Module<Export, Service = any> {
   static create<Service>(
     container: Container<Service>,
@@ -9,8 +12,8 @@ export class Module<Export, Service = any> {
   }
 
   private constructor(
-    public resolutions: ReadonlyArray<Resolution<Export>>,
-    private container: Container<Service>,
+    public readonly resolutions: ReadonlyArray<Resolution<Export>>,
+    private readonly container: Container<Service>,
   ) {}
 
   export<S extends Service>(binding: Binding<S>): Module<Export | S, Service> {
