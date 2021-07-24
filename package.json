@@ -34,7 +34,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@commitlint/cli": "8.0.0",
+    "@commitlint/cli": "13.1.0",
     "@commitlint/config-conventional": "8.0.0",
     "@types/jest": "24.0.15",
     "commitizen": "3.1.1",
